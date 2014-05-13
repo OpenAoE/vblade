@@ -57,12 +57,12 @@ permitted access to the vblade.  A MAC address can be specified in upper
 or lower case, with or without colons.
 .TP
 \fB-o\fP
-The -o flag takes an argument, the number of sectors that should be
-skipped at the beginning of filename.
+The -o flag takes an argument, the number of sectors at the beginning
+of the exported file that are excluded from AoE export (default zero).
 .TP
 \fB-l\fP
-The -l flag takes an argument, the number of sectors to exports.
-Defaults to the end of file.
+The -l flag takes an argument, the number of sectors to export.
+Defaults to the file size in sectors minus the offset.
 .SH EXAMPLE
 In this example, the root user on a host named
 .I nai
