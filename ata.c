@@ -164,12 +164,12 @@ atacmd(Ataregs *p, uchar *dp, int ndp, int payload) // do the ata cmd
 		return 0;
 	}
 	if (p->cmd == 0x20 || p->cmd == 0x24)
-		n = getsec(bfd, dp, lba, p->sectors);
+		n = getsec(bfd, dp, lba+offset, p->sectors);
 	else {
 		// packet should be big enough to contain the data
 		if (payload < 512 * p->sectors)
 			return -1;
-		n = putsec(bfd, dp, lba, p->sectors);
+		n = putsec(bfd, dp, lba+offset, p->sectors);
 	}
 	n /= 512;
 	if (n != p->sectors) {

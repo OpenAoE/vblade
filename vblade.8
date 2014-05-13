@@ -55,6 +55,14 @@ The -r flag restricts the export of the device to be read-only.
 The -m flag takes an argument, a comma separated list of MAC addresses
 permitted access to the vblade.  A MAC address can be specified in upper
 or lower case, with or without colons.
+.TP
+\fB-o\fP
+The -o flag takes an argument, the number of sectors that should be
+skipped at the beginning of filename.
+.TP
+\fB-l\fP
+The -l flag takes an argument, the number of sectors to exports.
+Defaults to the end of file.
 .SH EXAMPLE
 In this example, the root user on a host named
 .I nai

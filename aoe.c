@@ -462,11 +462,13 @@ int
 main(int argc, char **argv)
 {
 	int ch, omode = 0, readonly = 0;
+	vlong length = 0;
 
 	bufcnt = Bufcount;
+	offset = 0;
 	setbuf(stdin, NULL);
 	progname = *argv;
-	while ((ch = getopt(argc, argv, "b:dsrm:")) != -1) {
+	while ((ch = getopt(argc, argv, "b:dsrm:o:l:")) != -1) {
 		switch (ch) {
 		case 'b':
 			bufcnt = atoi(optarg);
@@ -484,6 +486,12 @@ main(int argc, char **argv)
 			break;
 		case 'm':
 			setmask(optarg);
+			break;
+		case 'o':
+			offset = atoi(optarg);
+			break;
+		case 'l':
+			length = atoi(optarg);
 			break;
 		case '?':
 		default:
@@ -505,6 +513,18 @@ main(int argc, char **argv)
 	setserial(argv[3], shelf, slot);
 	size = getsize(bfd);
 	size /= 512;
+	if (size < offset) {
+		fprintf(stderr, "Offset %llu too big - remaining size is negative!\n", offset);
+		exit(1);
+	}
+	size -= offset;
+	if (length) {
+		if (length > size) {
+			fprintf(stderr, "Length %llu too big - exceeds size of file!\n", offset);
+			exit(1);
+		}
+		size = length;
+	}
 	ifname = argv[2];
 	sfd = dial(ifname, bufcnt);
 	getea(sfd, ifname, mac);
