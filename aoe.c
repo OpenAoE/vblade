@@ -379,7 +379,7 @@ aoe(void)
 void
 usage(void)
 {
-	fprintf(stderr, "usage: %s [-b bufcnt] [-d ] [-s] [-r] [ -m mac[,mac...] ] shelf slot netif filename\n", 
+	fprintf(stderr, "usage: %s [-b bufcnt] [-o offset] [-l length] [-d ] [-s] [-r] [ -m mac[,mac...] ] shelf slot netif filename\n", 
 		progname);
 	exit(1);
 }
