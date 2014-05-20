@@ -463,6 +463,7 @@ main(int argc, char **argv)
 {
 	int ch, omode = 0, readonly = 0;
 	vlong length = 0;
+	char *end;
 
 	bufcnt = Bufcount;
 	offset = 0;
@@ -488,10 +489,14 @@ main(int argc, char **argv)
 			setmask(optarg);
 			break;
 		case 'o':
-			offset = atoi(optarg);
+			offset = strtoll(optarg, &end, 0);
+			if (end == optarg || offset < 0)
+				usage();
 			break;
 		case 'l':
-			length = atoi(optarg);
+			length = strtoll(optarg, &end, 0);
+			if (end == optarg || length < 1)
+				usage();
 			break;
 		case '?':
 		default:
