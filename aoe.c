@@ -518,8 +518,9 @@ main(int argc, char **argv)
 	setserial(argv[3], shelf, slot);
 	size = getsize(bfd);
 	size /= 512;
-	if (size < offset) {
-		fprintf(stderr, "Offset %llu too big - remaining size is negative!\n", offset);
+	if (size <= offset) {
+		fprintf(stderr,
+			"Offset %llu too large for file size\n", offset);
 		exit(1);
 	}
 	size -= offset;
