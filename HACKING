@@ -1,4 +1,4 @@
-Contributions to the vblade are welcome.  
+Contributions to the vblade are welcome.
 
 In contributing, though, please stay true to the original simplicity
 of the software.  Many open source projects suffer from the "creeping
@@ -7,7 +7,8 @@ feature, first seriously try to think of a way to accomplish your goal
 without adding to the vblade itself.
 
 Patches should be clean (to the point and easy to read) and should do
-one thing.  Send multiple patches if necessary.  Patches should be
+one thing.  (Avoid, for example, mixing style changes with substantive
+changes.)  Send multiple patches if necessary.  Patches should be
 generated with "diff -uprN" if possible, and should be designed to be
 applied with "patch -p1".
 
@@ -28,3 +29,8 @@ When you send your patch, here are some things to cover:
 
   * If your changes affect the end-user experience, have you updated
     the vblade documentation?
+
+  * Is your email client able to send a patch without changing it?
+    Many email clients and servers corrupt patches.  Please test your
+    email chain by sending an applying a patch before sending your
+    patch to the mailing list.

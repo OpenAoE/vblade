@@ -2,9 +2,14 @@
 INTRODUCTION
 ------------
 
-The vblade is the virtual EtherDrive (R) blade, a program that makes a
-seekable file available over an ethernet local area network (LAN) via
-the ATA over Ethernet (AoE) protocol.
+The vblade is a minimal ATA over Ethernet (AoE) storage target.  Its
+focus is simplicity, not performance or richness of features.  It
+exports a seekable file available over an ethernet local area network
+(LAN) via the AoE data storage protocol.
+
+The name, "vblade," is historical: It is a virtual EtherDrive (R)
+blade.  The first AoE target hardware sold by Coraid was in a blade
+form factor, ten to a 4-rack-unit chassis.
 
 The seekable file is typically a block device like /dev/md0 but even
 regular files will work.  Sparse files can be especially convenient.
