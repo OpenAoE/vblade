@@ -82,32 +82,27 @@ create_bpf_program(int shelf, int slot)
 {
 	struct bpf_program *bpf_program;
 	struct bpf_insn insns[] = {
-		/* Load the type into register */
+		/* CHECKTYPE: Load the type into register */
 		BPF_STMT(BPF_LD+BPF_H+BPF_ABS, 12),
 		/* Does it match AoE Type (0x88a2)? No, goto INVALID */
-		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, 0x88a2, 0, 12),
+		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, 0x88a2, 0, 10),
 		/* Load the flags into register */
 		BPF_STMT(BPF_LD+BPF_B+BPF_ABS, 14),
 		/* Check to see if the Resp flag is set */
 		BPF_STMT(BPF_ALU+BPF_AND+BPF_K, Resp),
 		/* Yes, goto INVALID */
-		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, 0, 0, 9),
-		/* Load the shelf number into register */
+		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, 0, 0, 7),
+		/* CHECKSHELF: Load the shelf number into register */
 		BPF_STMT(BPF_LD+BPF_H+BPF_ABS, 16),
-		/* Does it match shelf number? No, goto CHECKBROADCAST */
-		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, shelf, 0, 2),
-		/* Load the slot number into register */
+		/* Does it match shelf number? Yes, goto CHECKSLOT */
+		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, shelf, 1, 0),
+		/* Does it match broadcast? No, goto INVALID */
+		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, 0xffff, 0, 4),
+		/* CHECKSLOT: Load the slot number into register */
 		BPF_STMT(BPF_LD+BPF_B+BPF_ABS, 18),
 		/* Does it match shelf number? Yes, goto VALID */
-		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, slot, 4, 0),
-		/* CHECKBROADCAST: is (shelf, slot) == (0xffff, 0xff)? */
-		/* Load the shelf number into register */
-		BPF_STMT(BPF_LD+BPF_H+BPF_ABS, 16),
-		/* Is it 0xffff? No, goto INVALID */
-		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, 0xffff, 0, 3),
-		/* Load the slot number into register */
-		BPF_STMT(BPF_LD+BPF_B+BPF_ABS, 18),
-		/* Is it 0xff? No, goto INVALID */
+		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, slot, 1, 0),
+		/* Does it match broadcast? No, goto INVALID */
 		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, 0xff, 0, 1),
 		/* VALID: return -1 (allow the packet to be read) */
 		BPF_STMT(BPF_RET+BPF_K, -1),
