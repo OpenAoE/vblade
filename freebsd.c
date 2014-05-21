@@ -262,20 +262,19 @@ int
 getmtu(int fd, char *name)
 {
 	struct ifreq xx;
-    int s,n;
+	int s, n;
 
 	s = socket(AF_INET, SOCK_RAW, 0);
-    if (s == -1)
-    {
-	  perror("Can't get mtu");
-	  return 1500;
+	if (s == -1) {
+		perror("Can't get mtu");
+		return 1500;
 	}
 	xx.ifr_addr.sa_family = AF_INET;
 	strcpy(xx.ifr_name, name);
 	n = ioctl(s,SIOCGIFMTU, &xx);
 	if (n == -1) {
-	  perror("Can't get mtu");
-	  return 1500;
+		perror("Can't get mtu");
+		return 1500;
 	}
 	close(s);
 	return xx.ifr_mtu;
