@@ -270,7 +270,7 @@ getmtu(int fd, char *name)
 		return 1500;
 	}
 	xx.ifr_addr.sa_family = AF_INET;
-	strcpy(xx.ifr_name, name);
+	snprintf(xx.ifr_name, sizeof xx.ifr_name, "%s", name);
 	n = ioctl(s,SIOCGIFMTU, &xx);
 	if (n == -1) {
 		perror("Can't get mtu");
