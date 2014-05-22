@@ -519,10 +519,13 @@ main(int argc, char **argv)
 	size = getsize(bfd);
 	size /= 512;
 	if (size <= offset) {
-		fprintf(stderr,
-			"Offset %lld too large for %lld-sector export\n",
-                        offset,
-                        size);
+                if (offset)
+                        fprintf(stderr,
+                                "Offset %lld too large for %lld-sector export\n",
+                                offset,
+                                size);
+                else
+                        fputs("0-sector file size is too small\n", stderr);
 		exit(1);
 	}
 	size -= offset;
