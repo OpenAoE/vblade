@@ -520,7 +520,9 @@ main(int argc, char **argv)
 	size /= 512;
 	if (size <= offset) {
 		fprintf(stderr,
-			"Offset %llu too large for file size\n", offset);
+			"Offset %lld too large for %lld-sector export\n",
+                        offset,
+                        size);
 		exit(1);
 	}
 	size -= offset;
