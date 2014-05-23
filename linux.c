@@ -78,7 +78,7 @@ getindx(int s, char *name)	// return the index of device 'name'
 	struct ifreq xx;
 	int n;
 
-	strcpy(xx.ifr_name, name);
+	snprintf(xx.ifr_name, sizeof xx.ifr_name, "%s", name);
 	n = ioctl(s, SIOCGIFINDEX, &xx);
 	if (n == -1)
 		return -1;
@@ -91,7 +91,7 @@ getea(int s, char *name, uchar *ea)
 	struct ifreq xx;
 	int n;
 
-        strcpy(xx.ifr_name, name);
+        snprintf(xx.ifr_name, sizeof xx.ifr_name, "%s", name);
 	n = ioctl(s, SIOCGIFHWADDR, &xx);
 	if (n == -1) {
 		perror("Can't get hw addr");
@@ -107,7 +107,7 @@ getmtu(int s, char *name)
 	struct ifreq xx;
 	int n;
 
-	strcpy(xx.ifr_name, name);
+	snprintf(xx.ifr_name, sizeof xx.ifr_name, "%s", name);
 	n = ioctl(s, SIOCGIFMTU, &xx);
 	if (n == -1) {
 		perror("Can't get mtu");
