@@ -1,4 +1,11 @@
 -*- change-log -*-
+2014-06-08 Ed Cashin <ed.cashin@acm.org>
+	update version for v22 release candidate 1
+	buffer boundary cleanups
+	FreeBSD BPF and MTU fixes from Catalin Salgau
+	offset and size options by Christoph Biedl
+	vblade-22rc1
+
 2013-03-18 Ed Cashin <ecashin@coraid.com>
 	add big-endian support from Daniel Mealha Cabrita <dancab@gmx.net>
 	vblade-21

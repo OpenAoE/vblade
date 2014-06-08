@@ -6,7 +6,7 @@
  */
 
 enum {
-	VBLADE_VERSION		= 21,
+	VBLADE_VERSION		= 22,
 
 	// Firmware version
 	FWV			= 0x4000 + VBLADE_VERSION,
