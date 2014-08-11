@@ -1,4 +1,7 @@
 -*- change-log -*-
+2014-08-10 Ed Cashin <ed.cashin@acm.org>
+	vblade-22
+
 2014-06-08 Ed Cashin <ed.cashin@acm.org>
 	update version for v22 release candidate 1
 	buffer boundary cleanups
