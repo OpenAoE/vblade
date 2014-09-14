@@ -447,7 +447,7 @@ rrok(uchar *ea)
 }
 
 void
-setserial(char *f, int sh, int sl)
+setserial(int sh, int sl)
 {
 	char h[32];
 
@@ -513,7 +513,7 @@ main(int argc, char **argv)
 	}
 	shelf = atoi(argv[0]);
 	slot = atoi(argv[1]);
-	setserial(argv[3], shelf, slot);
+	setserial(shelf, slot);
 	size = getsize(bfd);
 	size /= 512;
 	if (size <= offset) {
