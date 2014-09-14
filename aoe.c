@@ -237,11 +237,9 @@ static int
 aoemask(Aoemask *mh, int len)
 {
 	Mdir *md, *mdi, *mde;
-	uchar *e;
 	int i, n;
 
 	n = 0;
-	e = (uchar *) mh + len;
 	md = mdi = (Mdir *) ((uchar *)mh + Nmaskhdr);
 	switch (mh->cmd) {
 	case Medit:
