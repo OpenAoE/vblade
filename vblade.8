@@ -77,8 +77,17 @@ background.
 nai:~# vblade 11 1 eth0 /data/3TB
 .fi
 .EE
-.SH BUGS
+.SH NOTES AND WARNINGS
 Users of Jumbo frames should read the README file distributed with
-vblade to learn about a workaround for kernel buffering limitations.
+.I vblade
+to learn about a workaround for kernel buffering limitations.
+.PP
+At least one AoE initiator (WinAoE) has been found to enforce legacy
+CHS geometry for drives by discarding sectors. You should ensure that
+the underlaying regular file or block device size is a multiple of
+8225280 bytes (255 heads, 63 sectors/track, 512 bytes/sector) if you
+encounter filesystem corruption.
+.SH REPORTING BUGS
+Please report bugs to the aoetools-discuss mailing list.
 .SH AUTHOR
 Brantley Coile (brantley@coraid.com)
