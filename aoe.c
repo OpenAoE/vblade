@@ -377,7 +377,7 @@ aoe(void)
 void
 usage(void)
 {
-	fprintf(stderr, "usage: %s [-b bufcnt] [-o offset] [-l length] [-d ] [-s] [-r] [ -m mac[,mac...] ] shelf slot netif filename\n", 
+	fprintf(stderr, "usage: %s [-a] [-b bufcnt] [-o offset] [-l length] [-d ] [-s] [-r] [ -m mac[,mac...] ] shelf slot netif filename\n",
 		progname);
 	exit(1);
 }
@@ -459,7 +459,7 @@ setserial(int sh, int sl)
 int
 main(int argc, char **argv)
 {
-	int ch, omode = 0, readonly = 0;
+	int ch, omode = 0, readonly = 0, detectvhd = 0;
 	vlong length = 0;
 	char *end;
 
@@ -467,8 +467,11 @@ main(int argc, char **argv)
 	offset = 0;
 	setbuf(stdin, NULL);
 	progname = *argv;
-	while ((ch = getopt(argc, argv, "b:dsrm:o:l:")) != -1) {
+	while ((ch = getopt(argc, argv, "ab:dsrm:o:l:")) != -1) {
 		switch (ch) {
+		case 'a':
+			detectvhd = 1;
+			break;
 		case 'b':
 			bufcnt = atoi(optarg);
 			break;
@@ -515,6 +518,19 @@ main(int argc, char **argv)
 	slot = atoi(argv[1]);
 	setserial(shelf, slot);
 	size = getsize(bfd);
+	if (detectvhd) {
+		detectvhd = autodetect_vhdfile(bfd, &size);
+		if (detectvhd < 0) {
+			fputs("VHD file found but ", stderr);
+			switch (detectvhd) {
+			case -1: fputs("format version unsupported\n", stderr); break;
+			case -2: fputs("not a fixed disk\n", stderr); break;
+			case -3: fputs("checksum is corrupted\n", stderr); break;
+			case -4: fputs("disk size exceeds file size\n", stderr); break;
+			}
+			exit(1);
+		}
+	}
 	size /= 512;
 	if (size <= offset) {
                 if (offset)
@@ -537,8 +553,9 @@ main(int argc, char **argv)
 	ifname = argv[2];
 	sfd = dial(ifname, bufcnt);
 	getea(sfd, ifname, mac);
-	printf("pid %ld: e%d.%d, %lld sectors %s\n",
+	printf("pid %ld: e%d.%d, %lld sectors %s%s\n",
 		(long) getpid(), shelf, slot, size,
+		detectvhd ? "VHD " : "",
 		readonly ? "O_RDONLY" : "O_RDWR");
 	fflush(stdout);
 	atainit();

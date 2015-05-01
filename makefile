@@ -8,7 +8,7 @@ sbindir = ${prefix}/sbin
 sharedir = ${prefix}/share
 mandir = ${sharedir}/man
 
-O=aoe.o bpf.o ${PLATFORM}.o ata.o
+O=aoe.o bpf.o ${PLATFORM}.o ata.o vhd.o
 CFLAGS += -Wall -g -O2
 CC = gcc
 
@@ -25,6 +25,9 @@ ata.o : ata.c config.h dat.h fns.h makefile
 	${CC} ${CFLAGS} -c $<
 
 bpf.o : bpf.c
+	${CC} ${CFLAGS} -c $<
+
+vhd.o : vhd.c config.h dat.h fns.h makefile
 	${CC} ${CFLAGS} -c $<
 
 config.h : config/config.h.in makefile
