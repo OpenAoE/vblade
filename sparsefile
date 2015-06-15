@@ -1,10 +1,20 @@
 #! /bin/sh
+# sparsefile - create sparse files conveniently
+#
 # depends on dd and dc commands.
 
-size=$1
-fnam=$2
-die() {
+usage() {
 	echo "usage: `basename $0` {10M|10G|10T} {filename}" 1>&2
+}
+size=$1
+if test "$size" = "-h"; then
+	usage
+	exit
+fi
+fnam=$2
+
+die() {
+	usage
 	exit 1
 }
 set -e
