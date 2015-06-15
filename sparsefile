@@ -1,0 +1,26 @@
+#! /bin/sh
+# depends on dd and dc commands.
+
+size=$1
+fnam=$2
+die() {
+	echo "usage: `basename $0` {10M|10G|10T} {filename}" 1>&2
+	exit 1
+}
+set -e
+units=`echo "$size" | sed 's!.*\(.\)$!\1!'`
+n=`echo "$size" | sed 's!\(.*\).$!\1!'`
+test "$units" && test "$n" && test "$units" != "$n" || die
+case "$units" in
+M)
+	seek=`echo "$n 1024 * 1 - p" | dc` ;;
+G)
+	seek=`echo "$n 1024 1024 * * 1 - p" | dc` ;;
+T)
+	seek=`echo "$n 1024 1024 1024 * * * 1 - p" | dc` ;;
+*)
+	die
+	;;
+esac
+sh -xc "dd bs=1k count=1 if=/dev/zero of=$fnam seek=$seek"
+ls -lh "$fnam"
