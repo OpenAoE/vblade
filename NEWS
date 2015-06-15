@@ -1,4 +1,14 @@
 -*- change-log -*-
+2015-06-14 Ed Cashin <ed.cashin@acm.org>
+	Add convenience script for creating sparse files
+	vblade-23
+
+2015-02-25 Catalin Salgau <csalgau@users.sourceforge.net>
+	Warn about Windows problem with CHS misalignment
+
+2014-09-13 Ed Cashin <ed.cashin@acm.org>
+	code cleanup: remove unused variables
+
 2014-08-10 Ed Cashin <ed.cashin@acm.org>
 	vblade-22
 
