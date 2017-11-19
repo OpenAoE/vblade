@@ -1,4 +1,7 @@
 -*- change-log -*-
+2017-11-19 Catalin Salgau <csalgau@users.sourceforge.net>
+	On FreeBSD limit used MTU to address BPF limitation
+
 2015-06-14 Ed Cashin <ed.cashin@acm.org>
 	Add convenience script for creating sparse files
 	vblade-23
