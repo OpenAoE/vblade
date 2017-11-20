@@ -262,7 +262,7 @@ int
 getmtu(int fd, char *name)
 {
 	struct ifreq xx;
-	int s, n;
+	int s, n, p;
 
 	s = socket(AF_INET, SOCK_RAW, 0);
 	if (s == -1) {
@@ -271,12 +271,18 @@ getmtu(int fd, char *name)
 	}
 	xx.ifr_addr.sa_family = AF_INET;
 	snprintf(xx.ifr_name, sizeof xx.ifr_name, "%s", name);
-	n = ioctl(s,SIOCGIFMTU, &xx);
+	n = ioctl(s, SIOCGIFMTU, &xx);
 	if (n == -1) {
 		perror("Can't get mtu");
 		return 1500;
 	}
 	close(s);
+	// FreeBSD bpf writes are capped at one PAGESIZE'd mbuf. As such we must
+	// limit our sector count. See FreeBSD PR 205164, OpenAoE/vblade #7.
+	p = getpagesize();
+	if (xx.ifr_mtu > p) {
+		return p;
+	}
 	return xx.ifr_mtu;
 }
 
