@@ -23,6 +23,9 @@ int	atacmd(Ataregs *, uchar *, int, int);
 void *	create_bpf_program(int, int);
 void	free_bpf_program(void *);
 
+// vhd.c
+int	autodetect_vhdfile(int fd, vlong *size);
+
 // os specific
 
 int	dial(char *, int);

@@ -34,6 +34,11 @@ communications.
 The name of the regular file or block device to export.
 .SS Options
 .TP
+\fB-a\fP
+The -a flag auto detects VHD files. Only the fixed disk format is
+supported. If found then the size of the VHD disk is used. Dynamic
+disks and corrupted VHD files are rejected.
+.TP
 \fB-b\fP
 The \-b flag takes an argument, the advertised buffer count, specifying
 the maximum number of outstanding messages the server can queue for
