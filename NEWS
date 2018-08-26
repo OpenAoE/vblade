@@ -1,4 +1,8 @@
 -*- change-log -*-
+2018-08-25 Christoph Biedl <sourceforge.bnwi@manchmal.in-ulm.de>
+	Print helpful error and exit immediately for missing device
+	vblade-24
+
 2017-11-19 Catalin Salgau <csalgau@users.sourceforge.net>
 	On FreeBSD limit used MTU to address BPF limitation
 
