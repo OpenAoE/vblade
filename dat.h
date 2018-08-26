@@ -6,7 +6,7 @@
  */
 
 enum {
-	VBLADE_VERSION		= 22,
+	VBLADE_VERSION		= 24,
 
 	// Firmware version
 	FWV			= 0x4000 + VBLADE_VERSION,
@@ -140,7 +140,7 @@ enum {
 	Bufcount = 16,
 
 	/* mask commands */
-	Mread= 0,	
+	Mread= 0,
 	Medit,
 
 	/* mask directives */
@@ -172,4 +172,3 @@ vlong	size;		// size of vblade
 vlong	offset;
 char	*progname;
 char	serial[Nserial+1];
-
