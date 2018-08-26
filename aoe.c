@@ -536,6 +536,8 @@ main(int argc, char **argv)
 	}
 	ifname = argv[2];
 	sfd = dial(ifname, bufcnt);
+	if (sfd < 0)
+		return 1;
 	getea(sfd, ifname, mac);
 	printf("pid %ld: e%d.%d, %lld sectors %s\n",
 		(long) getpid(), shelf, slot, size,

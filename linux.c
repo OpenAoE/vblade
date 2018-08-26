@@ -47,6 +47,10 @@ dial(char *eth, int bufcnt)		// get us a raw connection to an interface
 		return -1;
 	}
 	i = getindx(s, eth);
+	if (i < 0) {
+		perror(eth);
+		return -1;
+	}
 	sa.sll_family = AF_PACKET;
 	sa.sll_protocol = htons(0x88a2);
 	sa.sll_ifindex = i;
