@@ -1,5 +1,9 @@
 /* dat.h: include file for vblade AoE target */
 
+#ifndef EXTERN
+#define EXTERN extern
+#endif
+
 #define	nil	((void *)0)
 /*
  *	tunable variables
@@ -163,12 +167,12 @@ enum {
 	Nserial= 20,
 };
 
-int	shelf, slot;
-ulong	aoetag;
-uchar	mac[6];
-int	bfd;		// block file descriptor
-int	sfd;		// socket file descriptor
-vlong	size;		// size of vblade
-vlong	offset;
-char	*progname;
-char	serial[Nserial+1];
+EXTERN int	shelf, slot;
+EXTERN ulong	aoetag;
+EXTERN uchar	mac[6];
+EXTERN int	bfd;		// block file descriptor
+EXTERN int	sfd;		// socket file descriptor
+EXTERN vlong	size;		// size of vblade
+EXTERN vlong	offset;
+EXTERN char	*progname;
+EXTERN char	serial[Nserial+1];

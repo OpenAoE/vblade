@@ -9,6 +9,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <netinet/in.h>
+
+#define EXTERN
 #include "dat.h"
 #include "fns.h"
 
