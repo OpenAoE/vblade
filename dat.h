@@ -1,4 +1,5 @@
 /* dat.h: include file for vblade AoE target */
+#include <sys/types.h>
 
 #define	nil	((void *)0)
 /*
@@ -163,12 +164,12 @@ enum {
 	Nserial= 20,
 };
 
-int	shelf, slot;
-ulong	aoetag;
-uchar	mac[6];
-int	bfd;		// block file descriptor
-int	sfd;		// socket file descriptor
-vlong	size;		// size of vblade
-vlong	offset;
-char	*progname;
-char	serial[Nserial+1];
+extern int	shelf, slot;
+extern ulong	aoetag;
+extern uchar	mac[6];
+extern int	bfd;		// block file descriptor
+extern int	sfd;		// socket file descriptor
+extern vlong	size;		// size of vblade
+extern vlong	offset;
+extern char	*progname;
+extern char	serial[Nserial+1];
