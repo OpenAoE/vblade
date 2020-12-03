@@ -1,4 +1,8 @@
 -*- change-log -*-
+2020-12-02 Andreas Kölbl <koelblandreas@freenet.de>
+	Support recent compilers by avoiding multiple definitions
+	vblade-25
+
 2018-08-25 Christoph Biedl <sourceforge.bnwi@manchmal.in-ulm.de>
 	Print helpful error and exit immediately for missing device
 	vblade-24
