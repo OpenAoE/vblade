@@ -24,10 +24,10 @@ ${PLATFORM}.o : ${PLATFORM}.c config.h dat.h fns.h makefile
 ata.o : ata.c config.h dat.h fns.h makefile
 	${CC} ${CFLAGS} -c $<
 
-bpf.o : bpf.c
+bpf.o : bpf.c config.h
 	${CC} ${CFLAGS} -c $<
 
-dat.o : dat.c
+dat.o : dat.c config.h
 	${CC} ${CFLAGS} -c $<
 
 config.h : config/config.h.in makefile
@@ -38,7 +38,7 @@ config.h : config/config.h.in makefile
 	fi
 
 clean :
-	rm -f $O vblade
+	rm -f $O config.h vblade
 
 install : vblade vbladed
 	install vblade ${sbindir}/
